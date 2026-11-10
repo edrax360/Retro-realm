@@ -13,12 +13,11 @@ jobs:
           java-version: 17
       - name: Crear proyecto Android
         run: |
-                  mkdir -p proj/app/src/main/res/mipmap-xxxhdpi
-          cp Retro.jpg proj/app/src/main/res/mipmap-xxxhdpi/ic_launcher.jpg
-          <application android:label="Retro Realm" android:icon="@mipmap/ic_launcher" android:allowBackup="true" android:hardwareAccelerated="true">
           mkdir -p proj/app/src/main/java/com/pixelquest/game proj/app/src/main/assets
           f=$( [ -f Retro_Realm.html ] && echo Retro_Realm.html || ls *.html | head -1 )
           cp "$f" proj/app/src/main/assets/index.html
+          mkdir -p proj/app/src/main/res/mipmap-xxxhdpi
+          cp Retro.jpg proj/app/src/main/res/mipmap-xxxhdpi/ic_launcher.jpg
           cat > proj/settings.gradle <<'EOF'
           pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
           dependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories { google(); mavenCentral() } }
@@ -50,7 +49,7 @@ jobs:
           cat > proj/app/src/main/AndroidManifest.xml <<'EOF'
           <?xml version="1.0" encoding="utf-8"?>
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-              <application android:label="Retro Realm" android:allowBackup="true" android:hardwareAccelerated="true">
+              <application android:label="Retro Realm" android:icon="@mipmap/ic_launcher" android:allowBackup="true" android:hardwareAccelerated="true">
                   <activity android:name=".MainActivity" android:exported="true"
                       android:screenOrientation="sensorLandscape"
                       android:configChanges="orientation|screenSize|keyboardHidden|screenLayout|smallestScreenSize"
